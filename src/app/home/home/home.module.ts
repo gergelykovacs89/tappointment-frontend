@@ -3,10 +3,14 @@ import { CommonModule } from '@angular/common';
 import {HomeComponent} from '../home.component';
 import {RegisterComponent} from '../register/register.component';
 import {LoginComponent} from '../login/login.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   declarations: [HomeComponent, RegisterComponent, LoginComponent]
 })

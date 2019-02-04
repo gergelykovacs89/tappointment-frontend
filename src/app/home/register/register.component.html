@@ -1,3 +1,83 @@
-<p>
-  register works!
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xl-6 col-md-8 col-sm-10">
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="text"
+            id="email"
+            formControlName="email"
+            class="form-control"
+            [ngClass]="userForm.controls['email'].invalid ? 'is-invalid' : ''"
+            autofocus>
+          <label class="text-danger" *ngIf="userForm.controls['email'].hasError('email')"> Enter a valid email address! </label>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            class="form-control">
+          <label [ngClass]="userForm.controls['password'].hasError('required') || userForm.controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
+            <i class="material-icons">
+              {{ userForm.controls['password'].hasError('required') || userForm.controls['password'].hasError('minlength') ? 'cancel' : 'check_circle' }}
+            </i>
+            Must be at least 8 characters!
+          </label>
+
+          <label class="col" [ngClass]="userForm.controls['password'].hasError('required') || userForm.controls['password'].hasError('hasNumber')  ? 'text-danger' : 'text-success'">
+            <i class="material-icons">
+              {{ userForm.controls['password'].hasError('required') || userForm.controls['password'].hasError('hasNumber') ? 'cancel' : 'check_circle' }}
+            </i>
+            Must contain at least 1 number!
+          </label>
+
+          <label class="col" [ngClass]="userForm.controls['password'].hasError('required') || userForm.controls['password'].hasError('hasCapitalCase')  ? 'text-danger' : 'text-success'">
+            <i class="material-icons">
+              {{ userForm.controls['password'].hasError('required') || userForm.controls['password'].hasError('hasCapitalCase') ? 'cancel' : 'check_circle' }}
+            </i> Must contain at least 1 in Capital Case!
+          </label>
+
+          <label class="col" [ngClass]="userForm.controls['password'].hasError('required') || userForm.controls['password'].hasError('hasSmallCase')  ? 'text-danger' : 'text-success'">
+            <i class="material-icons">
+              {{ userForm.controls['password'].hasError('required') || userForm.controls['password'].hasError('hasSmallCase') ? 'cancel' : 'check_circle' }}
+            </i>
+            Must contain at least 1 Letter in Small Case!
+          </label>
+
+          <label class="col" [ngClass]="userForm.controls['password'].hasError('required') || userForm.controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'">
+            <i class="material-icons">
+              {{ userForm.controls['password'].hasError('required') || userForm.controls['password'].hasError('hasSpecialCharacters') ? 'cancel' : 'check_circle' }}
+            </i>
+            Must contain at least 1 Special Character!
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm you password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            formControlName="confirmPassword"
+            class="form-control">
+          <label class="text-danger" *ngIf="userForm.controls['confirmPassword'].hasError('NoPassswordMatch')"> Password do not match </label>
+        </div>
+        <div class="form-group">
+          <label for="fullName">Please enter your full name (optional)</label>
+          <input
+            type="text"
+            id="fullName"
+            formControlName="fullName"
+            class="form-control">
+        </div>
+        <button
+          type="submit"
+          class="btn btn-outline-success"
+          [disabled]="!userForm.valid">Register
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+

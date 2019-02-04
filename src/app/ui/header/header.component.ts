@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,17 +9,17 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   public isCollapsed = true;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
   onLogin() {
-
+    this.router.navigate(['/login']);
   }
 
   onRegister() {
-
+    this.router.navigate(['/register']);
   }
 
   onLogout() {
