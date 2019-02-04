@@ -1,3 +1,32 @@
-<p>
-  header works!
-</p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-white">
+  <a class="navbar-brand" style="color: darkslategray" routerLink="/"><h2>ÉtelFutár</h2></a>
+  <button class="navbar-toggler" type="button"  [attr.aria-expanded]="isCollapsed" aria-controls="collapseExample" (click)="isCollapsed = !isCollapsed" >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse " id="collapseExample" [ngbCollapse]="isCollapsed">
+    <ul class="navbar-nav mr-4 text-right">
+      <li class="nav-item">
+        <button class="btn btn-outline-secondary" id="login"
+                style="cursor: pointer; color: darkslategray"
+                (click)="onLogin()"
+                >
+          Login
+        </button>
+        <button class="btn btn-outline-secondary" id="register"
+                style="cursor: pointer; color: darkslategray"
+                (click)="onRegister()"
+                >
+          Register
+        </button>
+        <button class="btn btn-outline-secondary" id="logout"
+                style="cursor: pointer; color: darkslategray"
+                (click)="onLogout()"
+                >
+          Logout
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+

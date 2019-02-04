@@ -1,0 +1,12 @@
+.navbar-collapse{
+  justify-content: flex-end;
+}
+
+.navbar-toggler{
+  background: darkslategray !important;
+}
+
+
+#login, #register {
+  margin-right: 1em !important;
+}
