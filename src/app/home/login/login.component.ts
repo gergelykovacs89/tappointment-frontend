@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
+import {AuthService} from '../../auth/auth.service';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +14,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private userService: UserService,
+              private authService: AuthService,
               private router: Router) { }
 
   ngOnInit() {
@@ -32,11 +35,13 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.userService.loginUser(this.loginForm.value)
+    this.authService.loginUser(this.loginForm.value)
+      .pipe(first())
       .subscribe((res) => {
+          // @ts-ignore
           if (res['status'] === 'OK') {
             alert(res['message']);
-            this.router.navigate(['/profiles']);
+            this.router.navigate(['/']);
           }
         },
         (err) => {

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {CustomValidators} from '../../shared/custom-validators';
-import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   userForm: FormGroup;
-  constructor(private userService: UserService,
+  constructor(private authService: AuthService,
               private router: Router) { }
 
   ngOnInit() {
@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    this.userService.registerUser(this.userForm.value)
+    this.authService.registerUser(this.userForm.value)
       .subscribe((res) => {
         if (res['status'] === 'OK') {
           alert(res['message']);

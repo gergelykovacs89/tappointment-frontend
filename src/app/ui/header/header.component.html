@@ -5,22 +5,28 @@
   </button>
   <div class="collapse navbar-collapse " id="collapseExample" [ngbCollapse]="isCollapsed">
     <ul class="navbar-nav mr-4 text-right">
+      <li class="nav-item" *ngIf="user">
+        <h6>{{ user.email }}</h6>
+      </li>
       <li class="nav-item">
         <button class="btn btn-outline-secondary" id="login"
                 style="cursor: pointer; color: darkslategray"
                 (click)="onLogin()"
+                *ngIf="!authService.isUserAuthenticated()"
                 >
           Login
         </button>
         <button class="btn btn-outline-secondary" id="register"
                 style="cursor: pointer; color: darkslategray"
                 (click)="onRegister()"
+                *ngIf="!authService.isUserAuthenticated()"
                 >
           Register
         </button>
         <button class="btn btn-outline-secondary" id="logout"
                 style="cursor: pointer; color: darkslategray"
                 (click)="onLogout()"
+                *ngIf="authService.isUserAuthenticated()"
                 >
           Logout
         </button>
