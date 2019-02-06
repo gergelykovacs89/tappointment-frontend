@@ -15,7 +15,7 @@
                     <i title="Spicy" class="material-icons text-danger" *ngIf="item.Spicy === 1">{{ 'whatshot' }}</i>
                     <i title="Vegetarian" class="material-icons text-success" *ngIf="item.Vegatarian === 1">{{ 'spa' }}</i>
                   </label>
-                  <a *ngIf="authService.isUserAuthenticated()" class="btn btn-warning">{{ item.Price}} Ft</a>
+                  <a *ngIf="authService.isUserAuthenticated()" class="btn btn-warning" (click)="onAddToCart(item.id, 1)">{{ item.Price}} Ft</a>
                 </div>
               </div>
             </div>
