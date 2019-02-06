@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MenuitemModel} from '../shared/models/menuitem.model';
 import {MenuitemService} from '../services/menuitem.service';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,8 @@ export class HomeComponent implements OnInit {
   menuitems: MenuitemModel[];
   categories: Set<string>;
 
-  constructor(private menuItemService: MenuitemService) { }
+  constructor(private menuItemService: MenuitemService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.menuItemService.getMenuItems().subscribe((menuitems) => {
@@ -22,4 +24,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  getCategoryItems(category: string): MenuitemModel[] {
+    return this.menuitems.filter(item => item.Category === category);
+  }
 }

@@ -1,1 +1,28 @@
-<p>home component works</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-sm-12" *ngFor="let category of categories">
+      <ngb-accordion #acc="ngbAccordion">
+        <ngb-panel title="{{category}}">
+          <ng-template ngbPanelContent>
+            <div class="row justify-content-sm-between">
+            <div class="col-sm-12 col-md-4 col-xl-3" *ngFor="let item of getCategoryItems(category)">
+              <div class="card">
+                <img class="card-img-top" src="https://www.nosalty.hu/files/imagecache/recept/recept_kepek/247230_250794_tweb.jpg" alt="{{item.Name}}">
+                <div class="card-body text-center">
+                  <h5 class="card-title">{{item.Name}}</h5>
+                  <p class="card-text text-left">{{ item.Description }}</p>
+                  <label class="col" *ngIf="item.Spicy !== 0 || item.Vegatarian !== 0">
+                    <i title="Spicy" class="material-icons text-danger" *ngIf="item.Spicy === 1">{{ 'whatshot' }}</i>
+                    <i title="Vegetarian" class="material-icons text-success" *ngIf="item.Vegatarian === 1">{{ 'spa' }}</i>
+                  </label>
+                  <a *ngIf="authService.isUserAuthenticated()" class="btn btn-warning">{{ item.Price}} Ft</a>
+                </div>
+              </div>
+            </div>
+            </div>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+    </div>
+  </div>
+</div>
