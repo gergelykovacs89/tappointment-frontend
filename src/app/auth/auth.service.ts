@@ -66,14 +66,14 @@ export class AuthService {
             }
           });
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/']);
     }
   }
 
   setUser(res: Response) {
-    const user = new UserModel(res['user'].id, res['user'].email);
+    const user = new UserModel(res['user'].id, res['user'].email, res['orderId']);
     this.currentUserSubject.next(user);
-    localStorage.setItem('currentUser', JSON.stringify(res['user'], ['email', 'id']));
+    localStorage.setItem('currentUser', JSON.stringify(user));
     localStorage.setItem('userToken', JSON.stringify(res['userToken']));
   }
 
