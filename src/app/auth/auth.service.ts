@@ -6,9 +6,9 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 
-const REG_API_ENDPOINT = 'http://localhost:3000/api/register';
-const LOGIN_API_ENDPOINT = 'http://localhost:3000/api/login';
-const GET_USER_BY_TOKEN_API_ENDPOINT = 'http://localhost:3000/api/get-user';
+const REG_API_ENDPOINT = 'http://localhost:3000/user/register';
+const LOGIN_API_ENDPOINT = 'http://localhost:3000/user/login';
+const GET_USER_BY_TOKEN_API_ENDPOINT = 'http://localhost:3000/user/get-user';
 
 
 @Injectable({
