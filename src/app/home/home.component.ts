@@ -31,9 +31,6 @@ export class HomeComponent implements OnInit {
   }
 
   onAddToCart(menuitemId: number, amount: number) {
-    this.cartService.addItem(menuitemId, amount).
-      subscribe((res) => {
-        console.log(res);
-      });
+    this.cartService.addItem(menuitemId, amount);
   }
 }
