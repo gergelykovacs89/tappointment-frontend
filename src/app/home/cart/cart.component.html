@@ -1,0 +1,42 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="cart-modal">Cart</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <table class="table table-responsive">
+      <thead>
+      <tr>
+        <th scope="col">Amount</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price/item</th>
+        <th scope="col">Price/sum</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let cartitem of (cartItemDetails | async) | keyvalue">
+        <td>
+          <a (click)="decrementItem(cartitem.key.id)"><i class="material-icons">{{ 'remove' }}</i></a>
+          {{ (cartitem.value | number) }}
+          <a (click)="incrementItem(cartitem.key.id)"><i class="material-icons">{{ 'add' }}</i></a>
+        </td>
+        <td>
+          {{ cartitem.key.Name}}
+        </td>
+        <td>({{cartitem.key.Price | number}} Ft)</td>
+        <td>{{ cartitem.key.Price * cartitem.value | number }} Ft</td>
+        <td><a (click)="deleteItem(cartitem.key.id)"><i class="material-icons text-danger">{{ 'cancel' }}</i></a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <p>SumPrice: {{ (cartSum | async).sumPrice }} | Total Amount: {{(cartSum | async).totalAmount}}</p>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('checkout')">Checkout</button>
+  </div>
+</ng-template>
+
+<button class="btn btn-outline-primary" (click)="open(content)">Cart</button>

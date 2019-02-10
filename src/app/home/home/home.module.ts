@@ -6,6 +6,7 @@ import {LoginComponent} from '../login/login.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {CartComponent} from '../cart/cart.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     NgbModule
   ],
-  declarations: [HomeComponent, RegisterComponent, LoginComponent]
+  declarations: [HomeComponent, RegisterComponent, LoginComponent, CartComponent]
 })
 export class HomeModule { }
