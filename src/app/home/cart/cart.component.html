@@ -35,7 +35,12 @@
   </div>
   <div class="modal-footer">
     <p>SumPrice: {{ (cartSum | async).sumPrice }} | Total Amount: {{(cartSum | async).totalAmount}}</p>
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('checkout')">Checkout</button>
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.close('checkout')"
+      [disabled]="(cartSum | async).totalAmount === 0"
+    >Checkout</button>
   </div>
 </ng-template>
 
