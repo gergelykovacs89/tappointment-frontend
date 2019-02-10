@@ -22,8 +22,6 @@ export class RegisterComponent implements OnInit {
     const email = '';
     const password = '';
     const confirmPassword = '';
-    const fullName = '';
-
 
     this.userForm = new FormGroup({
         'email': new FormControl(email, Validators.compose([
@@ -36,8 +34,7 @@ export class RegisterComponent implements OnInit {
           CustomValidators.patternValidator(/[a-z]/, {hasSmallCase: true}),
           CustomValidators.patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, {hasSpecialCharacters: true}),
           Validators.minLength(8)])),
-        'confirmPassword': new FormControl(confirmPassword, Validators.compose([Validators.required])),
-        'fullName': new FormControl(fullName)
+        'confirmPassword': new FormControl(confirmPassword, Validators.compose([Validators.required]))
       },
       {
         validators: CustomValidators.passwordMatchValidator

@@ -3,7 +3,7 @@
     <div class="col-xl-6 col-md-8 col-sm-10">
       <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="email">Email</label>
+          <label for="email">E-mail</label>
           <input
             type="text"
             id="email"
@@ -14,67 +14,60 @@
           <label class="text-danger" *ngIf="userForm.controls['email'].hasError('email')"> Enter a valid email address! </label>
         </div>
         <div class="form-group">
-          <label for="password">Password</label>
+          <label for="password">Jelszó</label>
           <input
             type="password"
             id="password"
             formControlName="password"
             class="form-control">
+          <br>
           <label [ngClass]="userForm.controls['password'].hasError('required') || userForm.controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
             <i class="material-icons">
               {{ userForm.controls['password'].hasError('required') || userForm.controls['password'].hasError('minlength') ? 'cancel' : 'check_circle' }}
             </i>
-            Must be at least 8 characters!
+            Legyen legalább 8 karakter hosszú!
           </label>
 
           <label class="col" [ngClass]="userForm.controls['password'].hasError('required') || userForm.controls['password'].hasError('hasNumber')  ? 'text-danger' : 'text-success'">
             <i class="material-icons">
               {{ userForm.controls['password'].hasError('required') || userForm.controls['password'].hasError('hasNumber') ? 'cancel' : 'check_circle' }}
             </i>
-            Must contain at least 1 number!
+            Legyen legalább 1 szám!
           </label>
 
           <label class="col" [ngClass]="userForm.controls['password'].hasError('required') || userForm.controls['password'].hasError('hasCapitalCase')  ? 'text-danger' : 'text-success'">
             <i class="material-icons">
               {{ userForm.controls['password'].hasError('required') || userForm.controls['password'].hasError('hasCapitalCase') ? 'cancel' : 'check_circle' }}
-            </i> Must contain at least 1 in Capital Case!
+            </i> Legyen legalább 1 nagybetű!
           </label>
 
           <label class="col" [ngClass]="userForm.controls['password'].hasError('required') || userForm.controls['password'].hasError('hasSmallCase')  ? 'text-danger' : 'text-success'">
             <i class="material-icons">
               {{ userForm.controls['password'].hasError('required') || userForm.controls['password'].hasError('hasSmallCase') ? 'cancel' : 'check_circle' }}
             </i>
-            Must contain at least 1 Letter in Small Case!
+            Legyen legalább 1 kisbetű!
           </label>
 
           <label class="col" [ngClass]="userForm.controls['password'].hasError('required') || userForm.controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'">
             <i class="material-icons">
               {{ userForm.controls['password'].hasError('required') || userForm.controls['password'].hasError('hasSpecialCharacters') ? 'cancel' : 'check_circle' }}
             </i>
-            Must contain at least 1 Special Character!
+            Legyen legalább 1 speciális karakter!
           </label>
         </div>
         <div class="form-group">
-          <label for="confirmPassword">Confirm you password</label>
+          <label for="confirmPassword">Jelszó újra:</label>
           <input
             type="password"
             id="confirmPassword"
             formControlName="confirmPassword"
             class="form-control">
-          <label class="text-danger" *ngIf="userForm.controls['confirmPassword'].hasError('NoPassswordMatch')"> Password do not match </label>
-        </div>
-        <div class="form-group">
-          <label for="fullName">Please enter your full name (optional)</label>
-          <input
-            type="text"
-            id="fullName"
-            formControlName="fullName"
-            class="form-control">
+          <label class="text-danger" *ngIf="userForm.controls['confirmPassword'].hasError('NoPassswordMatch')"> A jelszavak nem egyeznek! </label>
         </div>
         <button
           type="submit"
           class="btn btn-outline-success"
-          [disabled]="!userForm.valid">Register
+          [disabled]="!userForm.valid">Regisztrálok
         </button>
       </form>
     </div>

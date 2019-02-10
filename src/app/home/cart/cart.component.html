@@ -1,6 +1,6 @@
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="cart-modal">Cart</h4>
+    <h4 class="modal-title" id="cart-modal">Kosár</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -9,10 +9,10 @@
     <table class="table table-responsive">
       <thead>
       <tr>
-        <th scope="col">Amount</th>
-        <th scope="col">Name</th>
-        <th scope="col">Price/item</th>
-        <th scope="col">Price/sum</th>
+        <th scope="col">Darab</th>
+        <th scope="col">Név</th>
+        <th scope="col">Egység ár</th>
+        <th scope="col">Tétel ár</th>
         <th scope="col"></th>
       </tr>
       </thead>
@@ -34,14 +34,14 @@
     </table>
   </div>
   <div class="modal-footer">
-    <p>SumPrice: {{ (cartSum | async).sumPrice }} | Total Amount: {{(cartSum | async).totalAmount}}</p>
+    <p>Összesen: {{ (cartSum | async).sumPrice }} Ft</p>
     <button
       type="button"
       class="btn btn-outline-dark"
       (click)="modal.close('checkout')"
       [disabled]="(cartSum | async).totalAmount === 0"
-    >Checkout</button>
+    >Megrendelem</button>
   </div>
 </ng-template>
 
-<button class="btn btn-outline-primary" (click)="open(content)">Cart</button>
+<button id="cart" class="btn btn-outline-primary" (click)="open(content)">Kosár</button>

@@ -16,21 +16,21 @@
                 (click)="onLogin()"
                 *ngIf="!authService.isUserAuthenticated()"
                 >
-          Login
+          Bejelentkezés
         </button>
         <button class="btn btn-outline-secondary" id="register"
                 style="cursor: pointer; color: darkslategray"
                 (click)="onRegister()"
                 *ngIf="!authService.isUserAuthenticated()"
                 >
-          Register
+          Regisztráció
         </button>
         <button class="btn btn-outline-secondary" id="logout"
                 style="cursor: pointer; color: darkslategray"
                 (click)="onLogout()"
                 *ngIf="authService.isUserAuthenticated()"
                 >
-          Logout
+          Kijelentkezés
         </button>
       </li>
     </ul>

@@ -1,3 +1,8 @@
 a .material-icons {
   cursor: pointer;
 }
+
+#cart {
+  margin-bottom: 2vw;
+  margin-top: 1vw;
+}
