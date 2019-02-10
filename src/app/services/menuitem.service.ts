@@ -25,6 +25,11 @@ export class MenuitemService {
     return this.menuItems.asObservable();
   }
 
+  getMenuItemById(cartItemId: number): MenuitemModel {
+    return this.menuItems.getValue().filter(menuItem => menuItem.id === cartItemId)[0];
+  }
+
+
   getCategories() {
     return this.categories.asObservable();
   }

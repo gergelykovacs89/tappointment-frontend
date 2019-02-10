@@ -5,6 +5,7 @@ import {map} from 'rxjs/operators';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
+import {CartService} from '../services/cart.service';
 
 const REG_API_ENDPOINT = 'http://localhost:3000/user/register';
 const LOGIN_API_ENDPOINT = 'http://localhost:3000/user/login';
@@ -19,14 +20,11 @@ export class AuthService {
   public currentUser: Observable<UserModel>;
 
   constructor(private userService: UserService,
+              private cartService: CartService,
               private httpClient: HttpClient,
               private router: Router) {
     this.currentUserSubject = new BehaviorSubject<UserModel>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
-  }
-
-  public get currentUserValue(): UserModel {
-    return this.currentUserSubject.value;
   }
 
   getUserByToken() {
@@ -72,6 +70,7 @@ export class AuthService {
 
   setUser(res: Response) {
     const user = new UserModel(res['user'].id, res['user'].email, res['orderId']);
+    this.cartService.updateCartSubject(res['orderDetail']);
     this.currentUserSubject.next(user);
     localStorage.setItem('currentUser', JSON.stringify(user));
     localStorage.setItem('userToken', JSON.stringify(res['userToken']));

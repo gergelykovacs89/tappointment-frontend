@@ -1,13 +1,15 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-white">
   <a class="navbar-brand" style="color: darkslategray" routerLink="/"><h2>ÉtelFutár</h2></a>
+  <ul class="navbar-nav mx-auto">
+    <li class="nav-item" *ngIf="user">
+      <h6>Bejelentkezve: {{ user.email }} </h6>
+    </li>
+  </ul>
   <button class="navbar-toggler" type="button"  [attr.aria-expanded]="isCollapsed" aria-controls="collapseExample" (click)="isCollapsed = !isCollapsed" >
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse " id="collapseExample" [ngbCollapse]="isCollapsed">
-    <ul class="navbar-nav mr-4 text-right">
-      <li class="nav-item" *ngIf="user">
-        <h6>{{ user.email }}</h6>
-      </li>
+    <ul class="navbar-nav mr-4">
       <li class="nav-item">
         <button class="btn btn-outline-secondary" id="login"
                 style="cursor: pointer; color: darkslategray"
