@@ -52,8 +52,9 @@ export class CartService {
               cartArray.push(addedItem);
               this.updateCartSubject(cartArray);
             }
-
           }
+        }, (err) => {
+          alert(err.error.error);
         }
       );
   }
@@ -80,6 +81,8 @@ export class CartService {
             const updatedCart = cartArray.filter(cartItem => cartItem.menuitemId !== deletedItemId);
             this.updateCartSubject(updatedCart);
           }
+        }, (err) => {
+            alert(err);
         }
       );
   }
