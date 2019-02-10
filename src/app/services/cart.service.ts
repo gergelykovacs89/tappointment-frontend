@@ -75,7 +75,6 @@ export class CartService {
               this.updateCartSubject(cartArray);
             }
           } else if (res['status'] === 'DELETED') {
-            console.log(res['cartItem'].menuitemId);
             const deletedItemId = res['cartItem'].menuitemId;
             const cartArray = this.currentCartSubject.getValue();
             const updatedCart = cartArray.filter(cartItem => cartItem.menuitemId !== deletedItemId);
