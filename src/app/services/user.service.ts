@@ -3,8 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import {CartService} from './cart.service';
 import {map} from 'rxjs/operators';
 
-const SET_ORDER_DETAILS_API_ENDPOINT = 'http://localhost:3000/user/set-order-details';
-const CONFIRM_ORDER_API_ENDPOINT = 'http://localhost:3000/user/confirm-order';
+const SET_ORDER_DETAILS_API_ENDPOINT = 'http://localhost:3000/order/set-order-details';
+const CONFIRM_ORDER_API_ENDPOINT = 'http://localhost:3000/order/confirm-order';
 
 @Injectable({
   providedIn: 'root'

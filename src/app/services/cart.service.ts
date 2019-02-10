@@ -21,7 +21,6 @@ export class CartService {
   private cartSumSubject: BehaviorSubject<{totalAmount: number, sumPrice: number}>;
   public cartSum: Observable<{totalAmount: number, sumPrice: number}>;
 
-
   constructor(private httpClient: HttpClient,
               private menuitemService: MenuitemService) {
     this.currentCartSubject = new BehaviorSubject<CartitemModel[]>([]);
@@ -41,17 +40,7 @@ export class CartService {
     })
       .subscribe((res) => {
           if (res['status'] === 'ADDED') {
-            const addedItem = new CartitemModel(res['cartItem'].menuitemId, res['cartItem'].numberOf);
-            const cartArray = this.currentCartSubject.getValue();
-            const updatedCartItemIndex = cartArray
-              .findIndex(cartItem => cartItem.menuitemId === addedItem.menuitemId);
-            if (updatedCartItemIndex !== -1) {
-              cartArray[updatedCartItemIndex] = addedItem;
-              this.updateCartSubject(cartArray);
-            } else {
-              cartArray.push(addedItem);
-              this.updateCartSubject(cartArray);
-            }
+            this.updateCart(res);
           }
         }, (err) => {
           alert(err.error.error);
@@ -67,22 +56,27 @@ export class CartService {
     })
       .subscribe((res) => {
           if (res['status'] === 'REMOVED') {
-            const removedItem = new CartitemModel(res['cartItem'].menuitemId, res['cartItem'].numberOf);
-            const cartArray = this.currentCartSubject.getValue();
-            const updatedCartItemIndex = cartArray
-              .findIndex(cartItem => cartItem.menuitemId === removedItem.menuitemId);
-            if (updatedCartItemIndex !== -1) {
-              cartArray[updatedCartItemIndex] = removedItem;
-              this.updateCartSubject(cartArray);
-            }
+            this.updateCart(res);
           } else if (res['status'] === 'DELETED') {
-            const deletedItemId = res['cartItem'].menuitemId;
-            const cartArray = this.currentCartSubject.getValue();
-            const updatedCart = cartArray.filter(cartItem => cartItem.menuitemId !== deletedItemId);
-            this.updateCartSubject(updatedCart);
+            this.deleteItemFromCart(res);
           }
         }, (err) => {
             alert(err);
+        }
+      );
+  }
+
+
+  deleteItem(menuitemId: number) {
+    const orderId = JSON.parse(localStorage.getItem('currentUser')).orderId;
+    return this.httpClient.put(DELETE_FROM_CART_API_ENPOINT, {
+      menuitemId: menuitemId,
+      orderId: orderId
+    })
+      .subscribe((res) => {
+          if (res['status'] === 'DELETED') {
+            this.deleteItemFromCart(res);
+          }
         }
       );
   }
@@ -101,22 +95,27 @@ export class CartService {
     this.currentCartSubject.next(cartItems);
   }
 
+  updateCart(res) {
+    const addedItem = new CartitemModel(res['cartItem'].menuitemId, res['cartItem'].numberOf);
+    const cartArray = this.currentCartSubject.getValue();
+    const updatedCartItemIndex = cartArray
+      .findIndex(cartItem => cartItem.menuitemId === addedItem.menuitemId);
+    if (updatedCartItemIndex !== -1) {
+      cartArray[updatedCartItemIndex] = addedItem;
+      this.updateCartSubject(cartArray);
+    } else {
+      if (res['status'] === 'ADDED') {
+        cartArray.push(addedItem);
+        this.updateCartSubject(cartArray);
+      }
+    }
+  }
 
-  deleteItem(menuitemId: number) {
-    const orderId = JSON.parse(localStorage.getItem('currentUser')).orderId;
-    return this.httpClient.put(DELETE_FROM_CART_API_ENPOINT, {
-      menuitemId: menuitemId,
-      orderId: orderId
-    })
-      .subscribe((res) => {
-          if (res['status'] === 'DELETED') {
-            const deletedItemId = res['cartItem'].menuitemId;
-            const cartArray = this.currentCartSubject.getValue();
-            const updatedCart = cartArray.filter(cartItem => cartItem.menuitemId !== deletedItemId);
-            this.updateCartSubject(updatedCart);
-          }
-        }
-      );
+  deleteItemFromCart(res) {
+    const deletedItemId = res['cartItem'].menuitemId;
+    const cartArray = this.currentCartSubject.getValue();
+    const updatedCart = cartArray.filter(cartItem => cartItem.menuitemId !== deletedItemId);
+    this.updateCartSubject(updatedCart);
   }
 }
 
